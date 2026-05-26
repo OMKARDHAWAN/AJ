@@ -17,7 +17,30 @@
   <servlet>
      <servlet-name>LoginServlet</servlet-name>
      <servlet-class>com.demo.servlet.LoginServlet</servlet-class>
+         
+     <init-param>
+        <param-name>username</param-name>
+        <param-value>admin</param-value>       
+     </init-param>
+     
+     
+     
+     <init-param>     
+        <param-name>password</param-name>
+        <param-value>12345</param-value>
+     </init-param>
+    
+    
+     <init-param>
+     <param-name>Company name</param-name>
+     <param-value>ABC pvt ltd</param-value>
+     </init-param>
+     
+     
   </servlet>
+  
+  
+  
   
   <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
