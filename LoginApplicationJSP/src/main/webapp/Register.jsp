@@ -8,14 +8,13 @@
 </head>
 <body>
     <form action="RegisterServlet" method="post">
-     email: <input type="email" name="email" />
+     email: <input type="text" name="email" />
      uname: <input type="text" name="uname"/>
      password: <input type="password" name="password" />
      role : <input type="text" name="role" />
-    
      <button type="submit">Submit</button>
      <h4>Already register?</h4>
-     <a href="">Login</a>
+     <a href="LoginForm.jsp">Login</a>
     </form>
 </body>
 </html>
