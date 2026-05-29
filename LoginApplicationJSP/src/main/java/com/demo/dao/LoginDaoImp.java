@@ -15,17 +15,18 @@ public class LoginDaoImp implements LoginDao{
   @Override
   public String validateUser(String uname, String password) {
 	// TODO Auto-generated method stub
-	if(conn != null) {
-
-		  
+	if(conn != null) { 
 		try {
 			PreparedStatement pst = conn.prepareStatement("select role from role where uname = ? and password = ?");
 			pst.setString(1, uname);
 			pst.setString(2, password);
-		    
 			ResultSet rs = pst.executeQuery();
+			
+			
 			if(rs.next()){
-				System.out.println(rs.getString(2));
+				System.out.println(uname);
+				System.out.println(password);
+				System.out.println(rs.getString(1));
 				return rs.getString(1);
 			}
 			
@@ -41,6 +42,29 @@ public class LoginDaoImp implements LoginDao{
 
 	  
 	  return null;
+  }
+
+  @Override
+  public Boolean updatePassword(String email , String newpassword) {
+	// TODO Auto-generated method stub
+	 if(conn != null) {
+		 try {
+				PreparedStatement ps = conn.prepareStatement("update role set password = ? where email = ?");
+				ps.setString(1, newpassword);
+				ps.setString(2, email);
+				
+				int n = ps.executeUpdate();
+				if(n > 0) {
+					return true;
+				}
+
+			  } catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			  }
+	 }
+	  
+	  return false;
   }
   
   

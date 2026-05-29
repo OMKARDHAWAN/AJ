@@ -16,6 +16,12 @@ public class LoginServicesImpl implements LoginServices{
 	// TODO Auto-generated method stub
 	return dao.validateUser(uname,password);
   }
+
+  @Override
+  public Boolean updatePassword(String email ,String newpassword) {
+	// TODO Auto-generated method stub
+	return dao.updatePassword(email ,newpassword);
+  }
   
   
   

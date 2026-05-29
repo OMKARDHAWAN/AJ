@@ -13,6 +13,7 @@
      <button type="submit">Submit</button>
      <h4>Not register?</h4>
      <a href="Register.jsp">Sign Up</a>
+     <a href="ForgotPass.jsp">Forgot Password?</a>     
    </form>
 </body>
 </html>

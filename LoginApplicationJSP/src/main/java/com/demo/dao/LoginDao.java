@@ -4,4 +4,6 @@ public interface LoginDao {
 
 	String validateUser(String uname, String password);
 
+	Boolean updatePassword(String email , String newpassword);
+
 }

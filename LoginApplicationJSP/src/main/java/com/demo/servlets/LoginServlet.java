@@ -6,6 +6,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -30,24 +32,36 @@ public class LoginServlet extends HttpServlet {
 		 LoginServices lservice = new LoginServicesImpl();
          PrintWriter out = response.getWriter(); 
 		 String role = lservice.authenticateUser(uname,password);
-		 System.out.println("role value in loginservlet" + role);
-         if(role != null){
-        	 if(role.equals("admin")) {
-        		 RequestDispatcher rst = request.getRequestDispatcher("Home.jsp");
-        		 rst.forward(request, response);
-        		 out.println("Hello admin");
-        		 System.out.println("<h1>hello admin</h1>");
-        	 }else if(role.equals("user")){
-        		 RequestDispatcher rst = request.getRequestDispatcher("Home.jsp");
-        		 rst.forward(request, response);
-        		 out.println("<h1>Hello user</h1>");
-        		 System.out.println("login");
-        	 }else {
-        		 RequestDispatcher rst = request.getRequestDispatcher("Login.jsp");
-        		 rst.include(request, response);
-        		 out.println("Error!!!!");
-        		 System.out.println("Error");
+
+         System.out.println(role);	 
+        	
+         if(role != null) {
+        	 switch(role){
+        	 case "admin"->{
+        		 HttpSession session = request.getSession();
+        		 session.setAttribute("user", uname);
+        		 session.setAttribute("password", password);
+        		 session.setAttribute("role", role);
+        		 response.sendRedirect("Home.jsp");
+        		 
+        	 }case "user"->{
+        		 System.out.println("username" + uname);
+          		 System.out.println("password"+ password);
+        		 response.sendRedirect("Home.jsp");
         	 }
+        	 default ->{
+            		 RequestDispatcher rst = request.getRequestDispatcher("LoginForm.jsp");
+            		 rst.include(request, response);
+        			 out.println("Error!!!!");
+        		 }
+        	 }
+        	 
+        	 
+         }else {
+        	 out.println("Invalid Login!!!!");
+        	 RequestDispatcher rst = request.getRequestDispatcher("LoginForm.jsp");
+    		 rst.include(request, response);
+         }
          }
 		 
 		 
@@ -55,4 +69,3 @@ public class LoginServlet extends HttpServlet {
 
 
 
-}
